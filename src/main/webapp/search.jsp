@@ -40,7 +40,7 @@
 <%@include file="components/navbar.jsp" %>
 
 <div class="container-fluid back-img">
-    <h1 class="text-center text-danger">Online Book Store</h1>
+<%--    <h1 class="text-center text-danger">Online Book Store</h1>--%>
 </div>
 <%--Start Recent Book--%>
 <div class="container">
@@ -65,10 +65,13 @@
                     <%
                         if(b.getBookCategory().equals("Old")){%>
                     <div>
+                        <% if(u==null){%>
+                        <a href="Login.jsp" class="btn btn-primary btn-sm">Details</a>
+                       <% }else{%>
                         <a href="view_book.jsp?bid=<%=b.getBookId()%>" class="btn btn-primary btn-sm">Details</a>
-                        <a href="" class="btn btn-primary btn-sm"><%=b.getPrice()%></a>
+                        <%}%>
+                        <a class="btn btn-primary btn-sm"><%=b.getPrice()%></a>
                     </div>
-
 
                     <%
                     }else{%>
@@ -84,8 +87,8 @@
                             }
                         %>
 
-                        <a href="" class="btn btn-primary btn-sm">Details</a>
-                        <a href="" class="btn btn-primary btn-sm"><%=b.getPrice()%></a>
+                        <a href="view_book.jsp?bid=<%=b.getBookId()%>" class="btn btn-primary btn-sm">Details</a>
+                        <a class="btn btn-primary btn-sm"><%=b.getPrice()%></a>
                     </div>
 
                     <%

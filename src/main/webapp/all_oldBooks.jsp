@@ -10,6 +10,7 @@
 <%@ page import="com.DAO.BookDAOImpl" %>
 <%@ page import="com.entity.BookDtls" %>
 <%@ page import="java.util.List" %>
+<%@ page import="com.entity.User" %>
 
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -31,7 +32,7 @@
 
 
 </head>
-<body style="background-color: thistle">
+<body style="background-color: #42dd0912">
 <%Connection conn= DBConnect.getConn();
     System.out.println(conn);
 
@@ -39,7 +40,7 @@
 <%@include file="components/navbar.jsp" %>
 
 <div class="container-fluid back-img">
-    <h1 class="text-center text-danger">Online Book Store</h1>
+<%--    <h1 class="text-center text-danger">Online Book Store</h1>--%>
 </div>
 <%--Start Old Book--%>
 <div class="container">
@@ -47,6 +48,7 @@
     <div class="row">
 
         <%
+            User u=(User) session.getAttribute("userobj");
             BookDAOImpl dao=new BookDAOImpl(DBConnect.getConn());
             List<BookDtls> list= dao.getAllOldBook();
             for(BookDtls b : list){
@@ -59,8 +61,16 @@
                     <p><%=b.getBookAuthor()%> </p>
                     <p>Category:<%=b.getBookCategory()%></p>
                     <div>
+                        <%
+                            if(u==null){%>
+                        <a href="Login.jsp?bid=<%=b.getBookId()%>" class="btn btn-primary btn-sm">Details</a>
+                        <% }else {%>
                         <a href="view_book.jsp?bid=<%=b.getBookId()%>" class="btn btn-primary btn-sm">Details</a>
-                        <a href="" class="btn btn-primary btn-sm"><%=b.getPrice()%></a>
+
+                        <%
+                            }
+                        %>
+                        <a class="btn btn-primary btn-sm"><%=b.getPrice()%></a>
                     </div>
                 </div>
 

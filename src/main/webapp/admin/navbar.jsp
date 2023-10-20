@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page isELIgnored="false" %>
 
-<div class="container-fluid" style="height:10px; background-color: indigo; "></div>
+<div class="container-fluid" style="height:10px; background-color: #00822d82; "></div>
 
 <div class="container-fluid p-3">
     <div class="row">
@@ -32,7 +32,7 @@
 </div>
 
 
-<nav class="navbar navbar-expand-lg navbar-light bg-custom">
+<nav class="navbar navbar-expand-lg navbar-light bg-custom" style="background-color: #00822d82">
     <div class="container-fluid ">
 <%--        <a class="navbar-brand" href="#"><i class="fas fa-home"></i></a>--%>
          <h3></h3>

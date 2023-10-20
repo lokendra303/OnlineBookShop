@@ -32,9 +32,9 @@
 
 
 </head>
-<body style="background-color: thistle">
+<body style="background-color: #42dd0912">
 <%Connection conn= DBConnect.getConn();
-    System.out.println(conn);
+
 
 %>
 <c:if test="${not empty addCart}">
@@ -56,7 +56,7 @@
 <%@include file="components/navbar.jsp" %>
 
 <div class="container-fluid back-img">
-    <h1 class="text-center text-danger">Online Book Store</h1>
+<%--    <h1 class="text-center text-danger">Online Book Store</h1>--%>
 </div>
 <%--Start New Book--%>
 <div class="container">
@@ -90,7 +90,7 @@
 
 
                         <a href="view_book.jsp?bid=<%=b.getBookId()%>" class="btn btn-primary btn-sm">Details</a>
-                        <a href="" class="btn btn-primary btn-sm"><%=b.getPrice()%></a>
+                        <a class="btn btn-primary btn-sm"><%=b.getPrice()%></a>
                     </div>
                 </div>
 

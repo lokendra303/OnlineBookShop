@@ -32,15 +32,16 @@
 
 
 </head>
-<body style="background-color: thistle">
-<%Connection conn= DBConnect.getConn();
+<body style="background-color: #42dd0912">
+<%
+    Connection conn = DBConnect.getConn();
     System.out.println(conn);
 
 %>
 <%@include file="components/navbar.jsp" %>
 
 <div class="container-fluid back-img">
-    <h1 class="text-center text-danger">Online Book Store</h1>
+    <%--    <h1 class="text-center text-danger">Online Book Store</h1>--%>
 </div>
 <%--Start Recent Book--%>
 <div class="container">
@@ -48,42 +49,59 @@
     <div class="row">
 
         <%
-            User u=(User) session.getAttribute("userobj");
-            BookDAOImpl dao=new BookDAOImpl(DBConnect.getConn());
-            List<BookDtls> list= dao.getAllRecentBook();
-            for(BookDtls b : list){
+            User u = (User) session.getAttribute("userobj");
+            BookDAOImpl dao = new BookDAOImpl(DBConnect.getConn());
+            List<BookDtls> list = dao.getAllRecentBook();
+            for (BookDtls b : list) {
         %>
         <div class="col-md-3">
             <div class="card">
                 <div class="card-body text-center">
-                    <img alt="" src="book/<%=b.getPhotoName()%>" style="width: 150px; height: 200px;" class="img-thumbnail">
-                    <p><%=b.getBookName()%> </p>
-                    <p><%=b.getBookAuthor()%> </p>
-                    <p>Category:<%=b.getBookCategory()%></p>
+                    <img alt="" src="book/<%=b.getPhotoName()%>" style="width: 150px; height: 200px;"
+                         class="img-thumbnail">
+                    <p><%=b.getBookName()%>
+                    </p>
+                    <p><%=b.getBookAuthor()%>
+                    </p>
+                    <p>Category:<%=b.getBookCategory()%>
+                    </p>
                     <%
-                        if(b.getBookCategory().equals("Old")){%>
+                        if (b.getBookCategory().equals("Old")) {%>
                     <div>
+                        <%--                        <a href="view_book.jsp?bid=<%=b.getBookId()%>" class="btn btn-primary btn-sm">Details</a>--%>
+                        <%--                        <a class="btn btn-primary btn-sm"><%=b.getPrice()%></a>--%>
+                        <%
+                            if (u == null) {%>
+                        <a href="Login.jsp?bid=<%=b.getBookId()%>" class="btn btn-primary btn-sm">Details</a>
+                        <% } else {%>
                         <a href="view_book.jsp?bid=<%=b.getBookId()%>" class="btn btn-primary btn-sm">Details</a>
-                        <a href="" class="btn btn-primary btn-sm"><%=b.getPrice()%></a>
+
+                        <%
+                            }
+                        %>
+                        <a class="btn btn-primary btn-sm"><%=b.getPrice()%>
+                        </a>
                     </div>
 
 
                     <%
-                    }else{%>
+                    } else {%>
 
                     <div>
                         <%
-                            if(u==null){%>
+                            if (u == null) {%>
                         <a href="Login.jsp" class="btn btn-success btn-sm"><i class="fas fa-cart-plus"></i>Add Cart</a>
-                        <% }else {%>
-                        <a href="cart?bid=<%=b.getBookId()%>&&uid=<%=u.getUserId()%>" class="btn btn-success btn-sm"><i class="fas fa-cart-plus"></i>Add Cart</a>
+                        <% } else {%>
+                        <a href="cart?bid=<%=b.getBookId()%>&&uid=<%=u.getUserId()%>" class="btn btn-success btn-sm"><i
+                                class="fas fa-cart-plus"></i>Add Cart</a>
 
                         <%
                             }
                         %>
 
-                        <a href="" class="btn btn-primary btn-sm">Details</a>
-                        <a href="" class="btn btn-primary btn-sm"><%=b.getPrice()%></a>
+                        <a class="btn btn-primary btn-sm">Details</a>
+                        <a class="btn btn-primary btn-sm"><%=b.getPrice()%>
+                        </a>
                     </div>
 
                     <%
@@ -104,6 +122,6 @@
 
 </div>
 <%--End Recent Book--%>
-<%@include file="components/footer.jsp"%>
+<%@include file="components/footer.jsp" %>
 </body>
 </html>
